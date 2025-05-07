@@ -39,77 +39,71 @@
 
 
 
-/*  __tests__/unit.test.js  */
+// __tests__/unit.test.js
 
-import {
-  isPhoneNumber,
-  isEmail,
-  isStrongPassword,
-  isDate,
-  isHexColor,
-} from '../code-to-unit-test/unit-test-me.js';
+import functions from '../code-to-unit-test/unit-test-me.js';
 
-/* ----------  Phone numbers  ---------- */
-test('valid phone ‑ parentheses', () =>
-  expect(isPhoneNumber('(858) 534-2230')).toBe(true));
+// ---------- Phone numbers ----------
+test('valid phone – parentheses', () =>
+  expect(functions.isPhoneNumber('(858) 534-2230')).toBe(true));
 
-test('valid phone ‑ dashes', () =>
-  expect(isPhoneNumber('858-534-2230')).toBe(true));
+test('valid phone – dashes', () =>
+  expect(functions.isPhoneNumber('858-534-2230')).toBe(true));
 
-test('invalid phone ‑ missing dash', () =>
-  expect(isPhoneNumber('8585342230')).toBe(false));
+test('invalid phone – missing dash', () =>
+  expect(functions.isPhoneNumber('8585342230')).toBe(false));
 
-test('invalid phone ‑ wrong format', () =>
-  expect(isPhoneNumber('(858 534-2230')).toBe(false));
+test('invalid phone – wrong format', () =>
+  expect(functions.isPhoneNumber('(858 534-2230')).toBe(false));
 
-/* ----------  Emails  ---------- */
-test('valid email ‑ edu domain', () =>
-  expect(isEmail('student123@ucsd.edu')).toBe(true));
+// ---------- Emails ----------
+test('valid email – edu domain', () =>
+  expect(functions.isEmail('student123@ucsd.edu')).toBe(true));
 
-test('valid email ‑ underscore', () =>
-  expect(isEmail('hello_world@domain.com')).toBe(true));
+test('valid email – underscore', () =>
+  expect(functions.isEmail('hello_world@domain.com')).toBe(true));
 
-test('invalid email ‑ missing TLD', () =>
-  expect(isEmail('user@domain')).toBe(false));
+test('invalid email – missing TLD', () =>
+  expect(functions.isEmail('user@domain')).toBe(false));
 
-test('invalid email ‑ no @', () =>
-  expect(isEmail('notanemail.com')).toBe(false));
+test('invalid email – no @', () =>
+  expect(functions.isEmail('notanemail.com')).toBe(false));
 
-/* ----------  Strong passwords  ---------- */
-test('valid pw ‑ starts with letter, 4 chars', () =>
-  expect(isStrongPassword('A123')).toBe(true));
+// ---------- Strong passwords ----------
+test('valid pw – starts with letter, 4 chars', () =>
+  expect(functions.isStrongPassword('A123')).toBe(true));
 
-test('valid pw ‑ underscores allowed', () =>
-  expect(isStrongPassword('Z__9_good')).toBe(true));
+test('valid pw – underscores allowed', () =>
+  expect(functions.isStrongPassword('Z__9_good')).toBe(true));
 
-test('invalid pw ‑ starts with digit', () =>
-  expect(isStrongPassword('1BadPass')).toBe(false));
+test('invalid pw – starts with digit', () =>
+  expect(functions.isStrongPassword('1BadPass')).toBe(false));
 
-test('invalid pw ‑ too short', () =>
-  expect(isStrongPassword('Ab')).toBe(false));
+test('invalid pw – too short', () =>
+  expect(functions.isStrongPassword('Ab')).toBe(false));
 
-/* ----------  Dates (MM/DD/YYYY or M/D/YYYY)  ---------- */
-test('valid date ‑ single digits', () =>
-  expect(isDate('1/1/2025')).toBe(true));
+// ---------- Dates ----------
+test('valid date – single digits', () =>
+  expect(functions.isDate('1/1/2025')).toBe(true));
 
-test('valid date ‑ double digits', () =>
-  expect(isDate('12/31/1999')).toBe(true));
+test('valid date – double digits', () =>
+  expect(functions.isDate('12/31/1999')).toBe(true));
 
-test('invalid date ‑ wrong separator', () =>
-  expect(isDate('1-1-2025')).toBe(false));
+test('invalid date – wrong separator', () =>
+  expect(functions.isDate('1-1-2025')).toBe(false));
 
-test('invalid date ‑ 5‑digit year', () =>
-  expect(isDate('12/31/19999')).toBe(false));
+test('invalid date – 5-digit year', () =>
+  expect(functions.isDate('12/31/19999')).toBe(false));
 
-/* ----------  Hex colors  ---------- */
-test('valid hex ‑ 3 chars with #', () =>
-  expect(isHexColor('#0fA')).toBe(true));
+// ---------- Hex colors ----------
+test('valid hex – 3 chars with #', () =>
+  expect(functions.isHexColor('#0fA')).toBe(true));
 
-test('valid hex ‑ 6 chars no #', () =>
-  expect(isHexColor('00ffcc')).toBe(true));
+test('valid hex – 6 chars no #', () =>
+  expect(functions.isHexColor('00ffcc')).toBe(true));
 
-test('invalid hex ‑ 4 chars', () =>
-  expect(isHexColor('#FFFF')).toBe(false));
+test('invalid hex – 4 chars', () =>
+  expect(functions.isHexColor('#FFFF')).toBe(false));
 
-test('invalid hex ‑ non‑hex symbols', () =>
-  expect(isHexColor('zzzzzz')).toBe(false));
+test('invalid hex – non-hex symbols', () =>
+  expect(functions.isHexColor('zzzzzz')).toBe(false));
