@@ -39,71 +39,79 @@
 
 
 
-// __tests__/unit.test.js
-
 import functions from '../code-to-unit-test/unit-test-me.js';
 
-// ---------- Phone numbers ----------
-test('valid phone – parentheses', () =>
-  expect(functions.isPhoneNumber('(858) 534-2230')).toBe(true));
+describe('isPhoneNumber', () => {
+    test('Valid phone number with parentheses and hyphen', () => {
+        expect(functions.isPhoneNumber('(123) 456-7890')).toBe(true);
+    });
+    test('Valid phone number with hyphens', () => {
+        expect(functions.isPhoneNumber('123-456-7890')).toBe(true);
+    });
+    test('Invalid phone number with missing digits', () => {
+        expect(functions.isPhoneNumber('123-45-6789')).toBe(false);
+    });
+    test('Invalid phone number with letters', () => {
+        expect(functions.isPhoneNumber('abc-456-7890')).toBe(false);
+    });
+});
 
-test('valid phone – dashes', () =>
-  expect(functions.isPhoneNumber('858-534-2230')).toBe(true));
+describe('isEmail', () => {
+    test('Valid email with basic format', () => {
+        expect(functions.isEmail('test@example.com')).toBe(true);
+    });
+    test('Valid email with subdomain and dot', () => {
+        expect(functions.isEmail('user.name@mail.co')).toBe(true);
+    });
+    test('Invalid email missing @ symbol', () => {
+        expect(functions.isEmail('plainaddress')).toBe(false);
+    });
+    test('Invalid email missing domain name', () => {
+        expect(functions.isEmail('user@.com')).toBe(false);
+    });
+});
 
-test('invalid phone – missing dash', () =>
-  expect(functions.isPhoneNumber('8585342230')).toBe(false));
+describe('isStrongPassword', () => {
+    test('Valid strong password with letters and digits', () => {
+        expect(functions.isStrongPassword('Password1')).toBe(true);
+    });
+    test('Valid strong password with mixed case and digits', () => {
+        expect(functions.isStrongPassword('aA1b2c3d')).toBe(true);
+    });
+    test('Invalid strong password starting with digit', () => {
+        expect(functions.isStrongPassword('12345')).toBe(false);
+    });
+    test('Invalid strong password too short', () => {
+        expect(functions.isStrongPassword('ab')).toBe(false);
+    });
+});
 
-test('invalid phone – wrong format', () =>
-  expect(functions.isPhoneNumber('(858 534-2230')).toBe(false));
+describe('isDate', () => {
+    test('Valid date in MM/DD/YYYY format', () => {
+        expect(functions.isDate('12/31/2020')).toBe(true);
+    });
+    test('Valid leap year date in MM/DD/YYYY format', () => {
+        expect(functions.isDate('02/29/2020')).toBe(true);
+    });
+    test('Invalid date with invalid month', () => {
+        expect(functions.isDate('13/01/2020')).toBe(false);
+    });
+    test('Invalid date with wrong format', () => {
+        expect(functions.isDate('2020-02-29')).toBe(false);
+    });
+});
 
-// ---------- Emails ----------
-test('valid email – edu domain', () =>
-  expect(functions.isEmail('student123@ucsd.edu')).toBe(true));
-
-test('valid email – underscore', () =>
-  expect(functions.isEmail('hello_world@domain.com')).toBe(true));
-
-test('invalid email – missing TLD', () =>
-  expect(functions.isEmail('user@domain')).toBe(false));
-
-test('invalid email – no @', () =>
-  expect(functions.isEmail('notanemail.com')).toBe(false));
-
-// ---------- Strong passwords ----------
-test('valid pw – starts with letter, 4 chars', () =>
-  expect(functions.isStrongPassword('A123')).toBe(true));
-
-test('valid pw – underscores allowed', () =>
-  expect(functions.isStrongPassword('Z__9_good')).toBe(true));
-
-test('invalid pw – starts with digit', () =>
-  expect(functions.isStrongPassword('1BadPass')).toBe(false));
-
-test('invalid pw – too short', () =>
-  expect(functions.isStrongPassword('Ab')).toBe(false));
-
-// ---------- Dates ----------
-test('valid date – single digits', () =>
-  expect(functions.isDate('1/1/2025')).toBe(true));
-
-test('valid date – double digits', () =>
-  expect(functions.isDate('12/31/1999')).toBe(true));
-
-test('invalid date – wrong separator', () =>
-  expect(functions.isDate('1-1-2025')).toBe(false));
-
-test('invalid date – 5-digit year', () =>
-  expect(functions.isDate('12/31/19999')).toBe(false));
-
-// ---------- Hex colors ----------
-test('valid hex – 3 chars with #', () =>
-  expect(functions.isHexColor('#0fA')).toBe(true));
-
-test('valid hex – 6 chars no #', () =>
-  expect(functions.isHexColor('00ffcc')).toBe(true));
-
-test('invalid hex – 4 chars', () =>
-  expect(functions.isHexColor('#FFFF')).toBe(false));
-
-test('invalid hex – non-hex symbols', () =>
-  expect(functions.isHexColor('zzzzzz')).toBe(false));
+describe('isHexColor', () => {
+    test('Valid 3-digit hex color code', () => {
+        expect(functions.isHexColor('#FFF')).toBe(true);
+    });
+    test('Valid 6-digit hex color code', () => {
+        expect(functions.isHexColor('#123ABC')).toBe(true);
+    });
+    test('Invalid hex color code with invalid characters', () => {
+        expect(functions.isHexColor('#123ABCG')).toBe(false);
+    });
+    test('Invalid hex color code missing hash', () => {
+        expect(functions.isHexColor('123ABC')).toBe(false);
+    });
+});
