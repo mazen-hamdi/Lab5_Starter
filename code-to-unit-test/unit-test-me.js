@@ -1,46 +1,35 @@
-// code-to-unit-test/unit-test-me.js
-// ------------------------------------------------------------
-// 1.  Implementations
-// ------------------------------------------------------------
 
-// matches valid phone numbers
-export function isPhoneNumber(phoneNumber) {
-  const phoneRegex = /((\(\d{3}\)\s?)|(\d{3}-))?\d{3}-\d{4}/;
-  return phoneRegex.test(phoneNumber);
+// 1. Phone number ( (123) 456-7890  OR  123-456-7890 )
+export function isPhoneNumber(str) {
+  const re = /((\(\d{3}\)\s?)|(\d{3}-))?\d{3}-\d{4}$/;
+  return re.test(str);
 }
 
-// matches valid emails
-export function isEmail(email) {
-  const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-  return emailRegex.test(email);
+// 2. Email ( basic user@domain.tld )
+export function isEmail(str) {
+  const re = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+  return re.test(str);
 }
 
-/**
- * Strong password rules:
- *  • first char must be a letter
- *  • total length 4–15 chars
- *  • only letters, digits, underscore
- */
-export function isStrongPassword(password) {
-  const pwRegex = /^[a-zA-Z]\w{3,14}$/;
-  return pwRegex.test(password);
+// 3. Strong password: 1st char letter, 4‑15 chars, letters/digits/_
+export function isStrongPassword(str) {
+  const re = /^[A-Za-z]\w{3,14}$/;
+  return re.test(str);
 }
 
-// matches dates like 1/1/2025 or 12/31/1999
-export function isDate(date) {
-  const dateRegex = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
-  return dateRegex.test(date);
+// 4. Date MM/DD/YYYY or M/D/YYYY
+export function isDate(str) {
+  const re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+  return re.test(str);
 }
 
-// matches 3‑ or 6‑digit hex color codes, # optional
-export function isHexColor(color) {
-  const colorRegex = /^#?[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/;
-  return colorRegex.test(color);
+// 5. Hex color #RGB, RGB, #RRGGBB, or RRGGBB
+export function isHexColor(str) {
+  const re = /^#?[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/;
+  return re.test(str);
 }
 
-// ------------------------------------------------------------
-// 2.  Default export so you can do `import functions from ...`
-// ------------------------------------------------------------
+// default export (so your test can do `import functions from ...`)
 export default {
   isPhoneNumber,
   isEmail,
