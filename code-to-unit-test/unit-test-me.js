@@ -115,3 +115,10 @@ describe('isHexColor', () => {
         expect(functions.isHexColor('123ABC')).toBe(false);
     });
 });
+export default {
+  isPhoneNumber,
+  isEmail,
+  isStrongPassword,
+  isDate,
+  isHexColor,
+};
